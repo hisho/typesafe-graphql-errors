@@ -1,0 +1,33 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+generator nestgraphql {
+  provider = "prisma-nestjs-graphql"
+  output = "../src/@generated/prisma-nestjs-graphql"
+}
+
+model Todo {
+ /// ID
+ id          Int      @id @default(autoincrement())
+ /// UID
+ uuid        String   @unique @default(uuid())
+ /// タイトル
+ title       String
+ /// 説明文
+ description String?
+ /// 作成日
+ createdAt   DateTime @default(now()) @map("created_at")
+ /// 更新日
+ updatedAt   DateTime @default(now()) @map("updated_at")
+
+ @@map("todos")
+}
