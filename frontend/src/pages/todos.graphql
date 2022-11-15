@@ -1,0 +1,10 @@
+query todos {
+  todos {
+    createdAt
+    description
+    id
+    title
+    updatedAt
+    uuid
+  }
+}
