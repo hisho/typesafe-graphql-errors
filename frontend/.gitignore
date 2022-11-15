@@ -37,3 +37,6 @@ next-env.d.ts
 
 # pathpida
 src/lib/pathpida/$path.ts
+
+# graphql codegen
+schema.graphql
