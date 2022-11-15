@@ -7,7 +7,7 @@
     "dev:next": "next dev",
     "dev:path": "pathpida --ignorePath .gitignore --output src/lib/pathpida --watch",
     "dev:graphql": "yarn build:graphql --watch",
-    "build": "run-s build:path build:next",
+    "build": "run-s build:path build:graphql build:next",
     "build:next": "next build",
     "build:path": "pathpida --ignorePath .gitignore --output src/lib/pathpida",
     "build:graphql": "graphql-codegen --require dotenv/config --config ./codegen.ts",
