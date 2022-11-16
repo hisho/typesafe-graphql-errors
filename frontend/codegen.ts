@@ -26,27 +26,20 @@ const sharedConfig = {
 const config: CodegenConfig = {
   overwrite: true,
   schema: process.env['NEXT_PUBLIC_GRAPHQL_URL'] ?? '',
-  documents: ['src/**/*.graphql'],
+  documents: ['src/**/*.tsx'],
   ignoreNoDocuments: true,
   generates: {
-    'src/lib/graphql/graphql.ts': {
-      plugins: ['typescript'],
+    'src/lib/graphql/generate': {
+      preset: 'gql-tag-operations-preset',
       config: sharedConfig,
-    },
-    'src/': {
-      preset: 'near-operation-file',
-      config: sharedConfig,
+      plugins: [],
       presetConfig: {
-        extension: '.generated.graphql.ts',
-        baseTypesPath: '~@src/lib/graphql/graphql',
+        augmentedModuleName: '@urql/core',
+        fragmentMasking: true,
       },
-      plugins: ['typescript-operations', 'typed-document-node'],
       hooks: {
         afterOneFileWrite: ['eslint --fix', 'prettier --write'],
       },
-    },
-    './schema.graphql': {
-      plugins: ['schema-ast'],
     },
   },
 }
