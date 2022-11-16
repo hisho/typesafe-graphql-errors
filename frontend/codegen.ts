@@ -41,6 +41,9 @@ const config: CodegenConfig = {
         afterOneFileWrite: ['eslint --fix', 'prettier --write'],
       },
     },
+    './schema.graphql': {
+      plugins: ['schema-ast'],
+    },
   },
 }
 
