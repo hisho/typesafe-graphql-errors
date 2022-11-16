@@ -1,5 +1,4 @@
 /* eslint-disable */
-import type { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core'
 export type Maybe<T> = T | null
 export type InputMaybe<T> = Maybe<T>
 export type Exact<T extends { [key: string]: unknown }> = {
@@ -86,49 +85,3 @@ export type UpdateTodoInput = {
   /** タイトル */
   readonly title?: InputMaybe<Scalars['String']>
 }
-
-export type TodosQueryVariables = Exact<{ [key: string]: never }>
-
-export type TodosQuery = {
-  readonly __typename?: 'Query'
-  readonly todos: ReadonlyArray<{
-    readonly __typename?: 'Todo'
-    readonly createdAt: string
-    readonly description: string | null
-    readonly id: string
-    readonly title: string
-    readonly updatedAt: string
-    readonly uuid: string
-  }>
-}
-
-export const TodosDocument = {
-  kind: 'Document',
-  definitions: [
-    {
-      kind: 'OperationDefinition',
-      operation: 'query',
-      name: { kind: 'Name', value: 'Todos' },
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'todos' },
-            selectionSet: {
-              kind: 'SelectionSet',
-              selections: [
-                { kind: 'Field', name: { kind: 'Name', value: 'createdAt' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'description' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'title' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'updatedAt' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'uuid' } },
-              ],
-            },
-          },
-        ],
-      },
-    },
-  ],
-} as unknown as DocumentNode<TodosQuery, TodosQueryVariables>
