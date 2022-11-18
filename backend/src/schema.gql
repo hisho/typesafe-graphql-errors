@@ -4,7 +4,7 @@
 
 input CreateTodoInput {
   """説明"""
-  description: String
+  description: String = null
 
   """タイトル"""
   title: String!
@@ -56,8 +56,8 @@ type Todo {
 
 input UpdateTodoInput {
   """説明"""
-  description: String
+  description: String = null
 
   """タイトル"""
-  title: String
+  title: String!
 }

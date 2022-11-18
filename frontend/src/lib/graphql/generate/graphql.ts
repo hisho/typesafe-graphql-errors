@@ -84,7 +84,7 @@ export type UpdateTodoInput = {
   /** 説明 */
   readonly description: InputMaybe<Scalars['String']>
   /** タイトル */
-  readonly title: InputMaybe<Scalars['String']>
+  readonly title: Scalars['String']
 }
 
 export type CreateTodoMutationVariables = Exact<{
@@ -94,6 +94,28 @@ export type CreateTodoMutationVariables = Exact<{
 export type CreateTodoMutation = {
   readonly __typename?: 'Mutation'
   readonly createTodo: { readonly __typename?: 'Todo'; readonly uuid: string }
+}
+
+export type UpdateTodoMutationVariables = Exact<{
+  uuid: Scalars['String']
+  input: UpdateTodoInput
+}>
+
+export type UpdateTodoMutation = {
+  readonly __typename?: 'Mutation'
+  readonly updateTodo: { readonly __typename?: 'Todo'; readonly uuid: string }
+}
+
+export type UpdateTodoFormQueryVariables = Exact<{ [key: string]: never }>
+
+export type UpdateTodoFormQuery = {
+  readonly __typename?: 'Query'
+  readonly todo: {
+    readonly __typename?: 'Todo'
+    readonly uuid: string
+    readonly title: string
+    readonly description: string | null
+  }
 }
 
 export const CreateTodoDocument = {
@@ -147,3 +169,111 @@ export const CreateTodoDocument = {
     },
   ],
 } as unknown as DocumentNode<CreateTodoMutation, CreateTodoMutationVariables>
+export const UpdateTodoDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'mutation',
+      name: { kind: 'Name', value: 'updateTodo' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: { kind: 'Variable', name: { kind: 'Name', value: 'uuid' } },
+          type: {
+            kind: 'NonNullType',
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'String' },
+            },
+          },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'input' },
+          },
+          type: {
+            kind: 'NonNullType',
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'UpdateTodoInput' },
+            },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'updateTodo' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'uuid' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'uuid' },
+                },
+              },
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'input' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'input' },
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'uuid' } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<UpdateTodoMutation, UpdateTodoMutationVariables>
+export const UpdateTodoFormDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'updateTodoForm' },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'todo' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'uuid' },
+                value: {
+                  kind: 'StringValue',
+                  value: '99d884e5-f582-479a-8748-0ded8f7f9528',
+                  block: false,
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'uuid' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'title' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'description' } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<UpdateTodoFormQuery, UpdateTodoFormQueryVariables>
