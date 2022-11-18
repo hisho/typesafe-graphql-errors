@@ -3,5 +3,5 @@ import { CreateTodoInput } from './create-todo.input';
 
 @InputType()
 export class UpdateTodoInput extends PartialType(
-  PickType(CreateTodoInput, ['title', 'description']),
+  PickType(CreateTodoInput, ['title', 'description'] as const),
 ) {}
