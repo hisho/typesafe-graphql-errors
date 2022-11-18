@@ -1,4 +1,5 @@
 /* eslint-disable */
+import type { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core'
 export type Maybe<T> = T | null
 export type InputMaybe<T> = Maybe<T>
 export type Exact<T extends { [key: string]: unknown }> = {
@@ -23,7 +24,7 @@ export type Scalars = {
 
 export type CreateTodoInput = {
   /** 説明 */
-  readonly description?: InputMaybe<Scalars['String']>
+  readonly description: InputMaybe<Scalars['String']>
   /** タイトル */
   readonly title: Scalars['String']
 }
@@ -81,7 +82,68 @@ export type Todo = {
 
 export type UpdateTodoInput = {
   /** 説明 */
-  readonly description?: InputMaybe<Scalars['String']>
+  readonly description: InputMaybe<Scalars['String']>
   /** タイトル */
-  readonly title?: InputMaybe<Scalars['String']>
+  readonly title: InputMaybe<Scalars['String']>
 }
+
+export type CreateTodoMutationVariables = Exact<{
+  input: CreateTodoInput
+}>
+
+export type CreateTodoMutation = {
+  readonly __typename?: 'Mutation'
+  readonly createTodo: { readonly __typename?: 'Todo'; readonly uuid: string }
+}
+
+export const CreateTodoDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'mutation',
+      name: { kind: 'Name', value: 'createTodo' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'input' },
+          },
+          type: {
+            kind: 'NonNullType',
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'CreateTodoInput' },
+            },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'createTodo' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'input' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'input' },
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'uuid' } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<CreateTodoMutation, CreateTodoMutationVariables>
