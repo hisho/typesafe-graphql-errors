@@ -1,7 +1,8 @@
-import { InputType, PartialType, PickType } from '@nestjs/graphql';
+import { InputType, PickType } from '@nestjs/graphql';
 import { CreateTodoInput } from './create-todo.input';
 
 @InputType()
-export class UpdateTodoInput extends PartialType(
-  PickType(CreateTodoInput, ['title', 'description'] as const),
-) {}
+export class UpdateTodoInput extends PickType(CreateTodoInput, [
+  'title',
+  'description',
+] as const) {}
