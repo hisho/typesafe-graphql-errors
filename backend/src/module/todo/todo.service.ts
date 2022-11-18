@@ -7,12 +7,12 @@ import { UpdateTodoInput } from './dto/update-todo.input';
 export class TodoService {
   constructor(private prisma: PrismaService) {}
 
-  findAll() {
+  async findAll() {
     return this.prisma.todo.findMany();
   }
 
   async findOne(uuid: string) {
-    return await this.prisma.todo.findUnique({
+    return this.prisma.todo.findUnique({
       rejectOnNotFound: true,
       where: {
         uuid,
@@ -21,7 +21,7 @@ export class TodoService {
   }
 
   async create(input: CreateTodoInput) {
-    return await this.prisma.todo.create({
+    return this.prisma.todo.create({
       data: {
         ...input,
         createdAt: new Date(),
@@ -31,7 +31,7 @@ export class TodoService {
   }
 
   async update(uuid: string, input: UpdateTodoInput) {
-    return await this.prisma.todo.update({
+    return this.prisma.todo.update({
       where: {
         uuid,
       },
@@ -43,7 +43,7 @@ export class TodoService {
   }
 
   async delete(uuid: string) {
-    return await this.prisma.todo.delete({
+    return this.prisma.todo.delete({
       where: {
         uuid,
       },
