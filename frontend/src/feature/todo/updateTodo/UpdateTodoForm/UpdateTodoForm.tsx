@@ -39,16 +39,13 @@ const UpdateTodoFormQuery = gql(/* GraphQL */ `
   }
 `)
 
-const schema = z
-  .object<ToZod<UpdateTodoInput>>({
-    title: z.string(),
-    description: z.string().nullable(),
-  })
-  .transform((value) => {
-    const description = isEmpty(value.description) ? null : value.description
-
-    return { title: value.title, description }
-  })
+const schema = z.object<ToZod<UpdateTodoInput>>({
+  title: z.string(),
+  description: z.preprocess(
+    (value) => (isEmpty(value) ? null : value),
+    z.string().nullable()
+  ),
+})
 
 export const UpdateTodoForm = () => {
   const [{ data, fetching: isFetching }] = useQuery({
