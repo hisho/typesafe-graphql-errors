@@ -44,12 +44,12 @@ export type MutationCreateTodoArgs = {
 }
 
 export type MutationDeleteTodoArgs = {
-  uuid: Scalars['String']
+  todoId: Scalars['String']
 }
 
 export type MutationUpdateTodoArgs = {
   input: UpdateTodoInput
-  uuid: Scalars['String']
+  todoId: Scalars['String']
 }
 
 export type Query = {
@@ -61,7 +61,7 @@ export type Query = {
 }
 
 export type QueryTodoArgs = {
-  uuid: Scalars['String']
+  todoId: Scalars['String']
 }
 
 export type Todo = {
@@ -76,8 +76,6 @@ export type Todo = {
   readonly title: Scalars['String']
   /** 更新日 */
   readonly updatedAt: Scalars['DateTime']
-  /** UID */
-  readonly uuid: Scalars['String']
 }
 
 export type UpdateTodoInput = {
@@ -93,17 +91,17 @@ export type CreateTodoMutationVariables = Exact<{
 
 export type CreateTodoMutation = {
   readonly __typename?: 'Mutation'
-  readonly createTodo: { readonly __typename?: 'Todo'; readonly uuid: string }
+  readonly createTodo: { readonly __typename?: 'Todo'; readonly id: string }
 }
 
 export type UpdateTodoMutationVariables = Exact<{
-  uuid: Scalars['String']
+  todoId: Scalars['String']
   input: UpdateTodoInput
 }>
 
 export type UpdateTodoMutation = {
   readonly __typename?: 'Mutation'
-  readonly updateTodo: { readonly __typename?: 'Todo'; readonly uuid: string }
+  readonly updateTodo: { readonly __typename?: 'Todo'; readonly id: string }
 }
 
 export type UpdateTodoFormQueryVariables = Exact<{ [key: string]: never }>
@@ -112,7 +110,7 @@ export type UpdateTodoFormQuery = {
   readonly __typename?: 'Query'
   readonly todo: {
     readonly __typename?: 'Todo'
-    readonly uuid: string
+    readonly id: string
     readonly title: string
     readonly description: string | null
   }
@@ -160,7 +158,7 @@ export const CreateTodoDocument = {
             selectionSet: {
               kind: 'SelectionSet',
               selections: [
-                { kind: 'Field', name: { kind: 'Name', value: 'uuid' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
               ],
             },
           },
@@ -179,7 +177,10 @@ export const UpdateTodoDocument = {
       variableDefinitions: [
         {
           kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'uuid' } },
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'todoId' },
+          },
           type: {
             kind: 'NonNullType',
             type: {
@@ -212,10 +213,10 @@ export const UpdateTodoDocument = {
             arguments: [
               {
                 kind: 'Argument',
-                name: { kind: 'Name', value: 'uuid' },
+                name: { kind: 'Name', value: 'todoId' },
                 value: {
                   kind: 'Variable',
-                  name: { kind: 'Name', value: 'uuid' },
+                  name: { kind: 'Name', value: 'todoId' },
                 },
               },
               {
@@ -230,7 +231,7 @@ export const UpdateTodoDocument = {
             selectionSet: {
               kind: 'SelectionSet',
               selections: [
-                { kind: 'Field', name: { kind: 'Name', value: 'uuid' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
               ],
             },
           },
@@ -255,7 +256,7 @@ export const UpdateTodoFormDocument = {
             arguments: [
               {
                 kind: 'Argument',
-                name: { kind: 'Name', value: 'uuid' },
+                name: { kind: 'Name', value: 'todoId' },
                 value: {
                   kind: 'StringValue',
                   value: '99d884e5-f582-479a-8748-0ded8f7f9528',
@@ -266,7 +267,7 @@ export const UpdateTodoFormDocument = {
             selectionSet: {
               kind: 'SelectionSet',
               selections: [
-                { kind: 'Field', name: { kind: 'Name', value: 'uuid' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'title' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'description' } },
               ],
