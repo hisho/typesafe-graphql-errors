@@ -1,5 +1,4 @@
-import { PrismaClient, Todo } from '@prisma/client';
-import { v4 } from 'uuid';
+import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
@@ -7,26 +6,17 @@ const prisma = new PrismaClient();
  * モデル投入用のデータ定義
  * @see https://www.prisma.io/docs/guides/database/seed-database
  */
-const todoData: Todo[] = [
-  {
-    id: 1,
-    uuid: v4(),
-    title: '初めてのTODO',
-    description: '初めてのTODOを作成する',
-    createdAt: new Date('2022-01-01T00:00:00+09:00'),
-    updatedAt: new Date('2022-01-01T00:00:00+09:00'),
-  },
-];
 
 const doSeed = async () => {
-  const todos = [];
-  for (const data of todoData) {
-    const createPosts = prisma.todo.create({
-      data,
+  const todos = [...Array(3)].map(async (_, i) => {
+    return prisma.todo.create({
+      data: {
+        title: `初めてのTODO${i}`,
+        description: `初めてのTODOを作成する${i}`,
+      },
     });
-    todos.push(createPosts);
-  }
-  return await prisma.$transaction(todos);
+  });
+  return Promise.all(todos);
 };
 
 const main = async () => {

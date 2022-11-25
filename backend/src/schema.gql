@@ -20,15 +20,15 @@ type Mutation {
   createTodo(input: CreateTodoInput!): Todo!
 
   """todo削除"""
-  deleteTodo(uuid: String!): Todo!
+  deleteTodo(todoId: String!): Todo!
 
   """todo更新"""
-  updateTodo(input: UpdateTodoInput!, uuid: String!): Todo!
+  updateTodo(input: UpdateTodoInput!, todoId: String!): Todo!
 }
 
 type Query {
   """todo取得"""
-  todo(uuid: String!): Todo!
+  todo(todoId: String!): Todo!
 
   """todo一覧取得"""
   todos: [Todo!]!
@@ -49,9 +49,6 @@ type Todo {
 
   """更新日"""
   updatedAt: DateTime!
-
-  """UID"""
-  uuid: String!
 }
 
 input UpdateTodoInput {

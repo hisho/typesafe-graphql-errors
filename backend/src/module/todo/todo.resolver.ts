@@ -14,8 +14,8 @@ export class TodoResolver {
   }
 
   @Query(() => Todo, { description: 'todo取得' })
-  todo(@Args('uuid') uuid: string) {
-    return this.postsService.findOne(uuid);
+  todo(@Args('todoId') todoId: string) {
+    return this.postsService.findOne(todoId);
   }
 
   @Mutation(() => Todo, { description: 'todo作成' })
@@ -25,14 +25,14 @@ export class TodoResolver {
 
   @Mutation(() => Todo, { description: 'todo更新' })
   updateTodo(
-    @Args('uuid') uuid: string,
+    @Args('todoId') todoId: string,
     @Args('input') input: UpdateTodoInput,
   ) {
-    return this.postsService.update(uuid, input);
+    return this.postsService.update(todoId, input);
   }
 
   @Mutation(() => Todo, { description: 'todo削除' })
-  deleteTodo(@Args('uuid') uuid: string) {
-    return this.postsService.delete(uuid);
+  deleteTodo(@Args('todoId') todoId: string) {
+    return this.postsService.delete(todoId);
   }
 }

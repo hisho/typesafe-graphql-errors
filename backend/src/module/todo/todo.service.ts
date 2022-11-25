@@ -11,11 +11,10 @@ export class TodoService {
     return this.prisma.todo.findMany();
   }
 
-  async findOne(uuid: string) {
+  async findOne(todoId: string) {
     return this.prisma.todo.findUnique({
-      rejectOnNotFound: true,
       where: {
-        uuid,
+        id: todoId,
       },
     });
   }
@@ -30,10 +29,10 @@ export class TodoService {
     });
   }
 
-  async update(uuid: string, input: UpdateTodoInput) {
+  async update(todoId: string, input: UpdateTodoInput) {
     return this.prisma.todo.update({
       where: {
-        uuid,
+        id: todoId,
       },
       data: {
         ...input,
@@ -42,10 +41,10 @@ export class TodoService {
     });
   }
 
-  async delete(uuid: string) {
+  async delete(todoId: string) {
     return this.prisma.todo.delete({
       where: {
-        uuid,
+        id: todoId,
       },
     });
   }

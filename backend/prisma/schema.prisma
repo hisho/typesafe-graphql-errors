@@ -12,22 +12,25 @@ datasource db {
 
 generator nestgraphql {
   provider = "prisma-nestjs-graphql"
-  output = "../src/@generated/prisma-nestjs-graphql"
+  output   = "../src/@generated/prisma-nestjs-graphql"
 }
 
+/// @ObjectType('TodoEntity')
 model Todo {
- /// ID
- id          Int      @id @default(autoincrement())
- /// UID
- uuid        String   @unique @default(uuid())
- /// タイトル
- title       String
- /// 説明文
- description String?
- /// 作成日
- createdAt   DateTime @default(now()) @map("created_at")
- /// 更新日
- updatedAt   DateTime @default(now()) @map("updated_at")
+  /// ID
+  id          String   @id @default(cuid())
 
- @@map("todos")
+  /// タイトル
+  title       String
+
+  /// 説明文
+  description String?
+
+  /// 作成日
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  /// 更新日
+  updatedAt   DateTime @default(now()) @map("updated_at")
+
+  @@map("todos")
 }
