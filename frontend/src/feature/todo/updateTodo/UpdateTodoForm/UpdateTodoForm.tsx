@@ -19,6 +19,8 @@ import { useGraphQLErrors } from '@src/feature/graphql/customErrors/useCustomGra
 import { isEmpty } from 'typesafe-utils'
 import { useEffect, useMemo, useRef } from 'react'
 
+const TODO_ID: string = 'clatfxg010000dyrvyz9o1rnx'
+
 const UpdateTodoMutation = gql(/* GraphQL */ `
   mutation updateTodo($todoId: String!, $input: UpdateTodoInput!) {
     updateTodo(todoId: $todoId, input: $input) {
@@ -28,8 +30,8 @@ const UpdateTodoMutation = gql(/* GraphQL */ `
 `)
 
 const UpdateTodoFormQuery = gql(/* GraphQL */ `
-  query updateTodoForm {
-    todo(todoId: "99d884e5-f582-479a-8748-0ded8f7f9528") {
+  query updateTodoForm($todoId: String!) {
+    todo(todoId: $todoId) {
       id
       title
       description
@@ -52,6 +54,9 @@ export const UpdateTodoForm = () => {
   const [{ data, fetching: isFetching }] = useQuery({
     query: UpdateTodoFormQuery,
     requestPolicy: 'network-only',
+    variables: {
+      todoId: TODO_ID,
+    },
   })
 
   const defaultValues = useMemo(() => {
@@ -105,9 +110,7 @@ export const UpdateTodoForm = () => {
       <Heading>Update TODO</Heading>
       <Box h={4} />
       <chakra.form
-        onSubmit={handleSubmit((input) =>
-          handleUpdateTodo('99d884e5-f582-479a-8748-0ded8f7f9528', input)
-        )}
+        onSubmit={handleSubmit((input) => handleUpdateTodo(TODO_ID, input))}
       >
         <FormControl
           label={'タイトル'}

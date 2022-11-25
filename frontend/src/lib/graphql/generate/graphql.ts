@@ -104,7 +104,9 @@ export type UpdateTodoMutation = {
   readonly updateTodo: { readonly __typename?: 'Todo'; readonly id: string }
 }
 
-export type UpdateTodoFormQueryVariables = Exact<{ [key: string]: never }>
+export type UpdateTodoFormQueryVariables = Exact<{
+  todoId: Scalars['String']
+}>
 
 export type UpdateTodoFormQuery = {
   readonly __typename?: 'Query'
@@ -247,6 +249,22 @@ export const UpdateTodoFormDocument = {
       kind: 'OperationDefinition',
       operation: 'query',
       name: { kind: 'Name', value: 'updateTodoForm' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'todoId' },
+          },
+          type: {
+            kind: 'NonNullType',
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'String' },
+            },
+          },
+        },
+      ],
       selectionSet: {
         kind: 'SelectionSet',
         selections: [
@@ -258,9 +276,8 @@ export const UpdateTodoFormDocument = {
                 kind: 'Argument',
                 name: { kind: 'Name', value: 'todoId' },
                 value: {
-                  kind: 'StringValue',
-                  value: '99d884e5-f582-479a-8748-0ded8f7f9528',
-                  block: false,
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'todoId' },
                 },
               },
             ],
