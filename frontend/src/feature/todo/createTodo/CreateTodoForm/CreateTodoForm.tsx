@@ -12,7 +12,7 @@ import { isEmpty } from 'typesafe-utils'
 const CreateTodoMutation = gql(/* GraphQL */ `
   mutation createTodo($input: CreateTodoInput!) {
     createTodo(input: $input) {
-      uuid
+      id
     }
   }
 `)
