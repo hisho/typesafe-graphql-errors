@@ -16,7 +16,18 @@ const doSeed = async () => {
       },
     });
   });
-  return Promise.all(todos);
+
+  const tags = [...Array(3)]
+    .map((_, i) => `初めてのタグ${i}`)
+    .map(async (name) => {
+      return prisma.tag.create({
+        data: {
+          name,
+        },
+      });
+    });
+
+  return Promise.all([todos, tags]);
 };
 
 const main = async () => {
