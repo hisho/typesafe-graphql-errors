@@ -18,7 +18,7 @@ generator nestgraphql {
 /// @ObjectType('TodoEntity')
 model Todo {
   /// ID
-  id String @id @default(cuid())
+  id String @id @default(uuid())
 
   /// タイトル
   title String
@@ -41,7 +41,7 @@ model Todo {
 /// @ObjectType('TagEntity')
 model Tag {
   /// ID
-  id String @id @default(cuid())
+  id String @id @default(uuid())
 
   /// 説明文
   description String?
