@@ -18,19 +18,45 @@ generator nestgraphql {
 /// @ObjectType('TodoEntity')
 model Todo {
   /// ID
-  id          String   @id @default(cuid())
+  id String @id @default(cuid())
 
   /// タイトル
-  title       String
+  title String
 
   /// 説明文
   description String?
 
   /// 作成日
-  createdAt   DateTime @default(now()) @map("created_at")
+  createdAt DateTime @default(now()) @map("created_at")
 
   /// 更新日
-  updatedAt   DateTime @default(now()) @map("updated_at")
+  updatedAt DateTime @default(now()) @updatedAt @map("updated_at")
+
+  /// TODOに紐付いているタグ
+  tags Tag[]
 
   @@map("todos")
+}
+
+/// @ObjectType('TagEntity')
+model Tag {
+  /// ID
+  id String @id @default(cuid())
+
+  /// 説明文
+  description String?
+
+  /// タグ名
+  name String @unique @map("name")
+
+  /// タグに紐付いているTodo
+  todos Todo[]
+
+  /// 作成日
+  createdAt DateTime @default(now()) @map("created_at")
+
+  /// 更新日
+  updatedAt DateTime @default(now()) @updatedAt @map("updated_at")
+
+  @@map("tags")
 }
